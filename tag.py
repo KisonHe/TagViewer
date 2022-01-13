@@ -1,0 +1,40 @@
+# -*- coding: UTF-8 -*-
+from enum import Enum
+from PyQt5 import QtWidgets
+from uiInstance import pyqtUiInstance
+# tag的可能的status
+class Status(Enum):
+    # Must Start from 0 and add one by one
+    # Because func getNext
+    NONE = 0
+    MAIN_TAG_ONLY = 1
+    EXTRA_TAG_ONLY = 2
+    BOTH_TAGS = 3
+
+    def getNext(self):
+        tmp = self.value + 1
+        if tmp >= len(Status):
+            return Status(0)
+        else:
+            return Status(tmp)
+
+class tag:
+    register = None
+    ui_instance = None
+    status = Status.NONE
+    colors = ["red","green","blue","yellow"]
+    def setupUi(self, parent):
+        # TODO
+        parent.addWidget(self.ui_instance)
+        pass
+    def __init__(self, name, register) -> None:
+        # We want to have many choices, here should we use factory?
+        self.ui_instance = QtWidgets.QPushButton(name)
+        self.ui_instance.clicked.connect(self.onTagPressed)
+        self.register = register
+        pass
+    def onTagPressed(self):
+        self.status = self.status.getNext()
+        tmp = "background-color : " + self.colors[self.status.value]
+        self.ui_instance.setStyleSheet(tmp)
+        
