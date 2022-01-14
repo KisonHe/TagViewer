@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
-from viewer_block import *
+from viewer_block.WordViewer import WordViewer
+from viewer_block.GraphViewer import GraphViewer
 
 class ViewerSimpleFactory:
 

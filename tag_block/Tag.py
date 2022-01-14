@@ -6,7 +6,7 @@ from design.colorDesign import tag_colors
 
 
 # tag的可能的status
-class Status(Enum):
+class TagStatus(Enum):
     # Must Start from 0 and add one by one
     # Because func getNext
     NONE = 0
@@ -15,8 +15,8 @@ class Status(Enum):
     BOTH_TAGS = 3
 
     def getNext(self):
-        tmp = (self.value + 1) % len(Status)
-        return Status(tmp)
+        tmp = (self.value + 1) % len(TagStatus)
+        return TagStatus(tmp)
 
     def getHintString(self):
         return ["Tag未生效", "只算Main", "只算Extra", "两个都算"][self.value]
@@ -25,7 +25,7 @@ class Status(Enum):
 class Tag:
     register = None
     ui_instance = None
-    status = Status.NONE
+    status = TagStatus.NONE
 
     # colors = ["#9D849A","#A9B0BC","#90A3B9","#637081"]
     def updateUi(self):
