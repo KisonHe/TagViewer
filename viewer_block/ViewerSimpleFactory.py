@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from viewer_block.WordViewer import WordViewer
+from viewer_block import *
 
 class ViewerSimpleFactory:
 
@@ -10,7 +10,7 @@ class ViewerSimpleFactory:
         if type == "word":
             print("Create viewer: word viewer!")
             return WordViewer()
-        elif typr == "graph":
+        elif type == "graph":
             print("Create viewer: graph viewer!")
             return GraphViewer()
         else:
