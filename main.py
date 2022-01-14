@@ -6,8 +6,9 @@ from PyQt5 import QtWidgets, uic
 from Ui_MainWindow import Ui_MainWindow
 from PyQt5.QtCore import Qt
 import pandas
-from tag import tag
+from Tag import Tag
 import xlrd
+from TagRegister import TagRegister
 
 # Set True to ignore ! starting Tags
 ignoreExclamationMark = True
@@ -70,13 +71,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
 if (__name__ == "__main__"):
     readExcelData()
+    main_tag_register = TagRegister()
 
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
     window.show()
     tag_list = []
     for i in range(4):
-        mainTag = tag("Tag",None)
+        mainTag = Tag("Tag",main_tag_register)
         mainTag.setupUi(window.horizontalLayout)
         tag_list.append(mainTag)
         pass

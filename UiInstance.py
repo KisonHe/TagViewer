@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-class uiInstanceAbstract:
+class UiInstanceAbstract:
     def setupUi(self):
         pass
     def changeBackGroundColor(self):
@@ -9,7 +9,7 @@ class uiInstanceAbstract:
     def __init__(self) -> None:
         pass
 
-class pyqtUiInstance(uiInstanceAbstract):
+class PyqtUiInstance(UiInstanceAbstract):
     instance = None
     def setupUi():
         pass

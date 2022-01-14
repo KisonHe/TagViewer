@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from enum import Enum
 from PyQt5 import QtWidgets
-from uiInstance import pyqtUiInstance
+from UiInstance import PyqtUiInstance
 from colorDesign import tag_colors
 # tag的可能的status
 class Status(Enum):
@@ -21,7 +21,7 @@ class Status(Enum):
     def getHintString(self):
         return ["Tag未生效","只算Main","只算Extra","两个都算"][self.value]
 
-class tag:
+class Tag:
     register = None
     ui_instance = None
     status = Status.NONE
@@ -37,11 +37,14 @@ class tag:
         pass
     def __init__(self, name, register) -> None:
         # We want to have many choices, here should we use factory?
+        self.name = name
         self.ui_instance = QtWidgets.QPushButton(name)
-        self.ui_instance.clicked.connect(self.onTagPressed)
+        self.ui_instance.clicked.connect(self.tagUpdate)
         self.register = register
+        self.register.tagUpdate(self.name,self.status)
         pass
-    def onTagPressed(self):
+    def tagUpdate(self):
         self.status = self.status.getNext()
         self.updateUi()
+        self.register.tagUpdate(self.name,self.status)
         
