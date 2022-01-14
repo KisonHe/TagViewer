@@ -15,11 +15,8 @@ class Status(Enum):
     BOTH_TAGS = 3
 
     def getNext(self):
-        tmp = self.value + 1
-        if tmp >= len(Status):
-            return Status(0)
-        else:
-            return Status(tmp)
+        tmp = (self.value + 1) % len(Status)
+        return Status(tmp)
 
     def getHintString(self):
         return ["Tag未生效", "只算Main", "只算Extra", "两个都算"][self.value]
@@ -44,6 +41,7 @@ class Tag:
 
     def __init__(self, name, register) -> None:
         # We want to have many choices, here should we use factory?
+        # answer by jack: I think no
         self.name = name
         self.ui_instance = QtWidgets.QPushButton(name)
         self.ui_instance.clicked.connect(self.onTagCliecked)
