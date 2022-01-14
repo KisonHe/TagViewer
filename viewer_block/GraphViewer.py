@@ -6,7 +6,7 @@ class GraphViewer(ViewerInterface):
     def __init__(self):
         pass
 
-    def display(self):
+    def display(self, data:dict):
         # add your code here
 
         # add your code end

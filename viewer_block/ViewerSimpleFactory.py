@@ -1,7 +1,10 @@
 # -*- coding: UTF-8 -*-
 from viewer_block.WordViewer import WordViewer
 from viewer_block.GraphViewer import GraphViewer
+import logging
 
+log = logging.getLogger('ViewerSimpleFactory')
+log.setLevel(logging.INFO)
 class ViewerSimpleFactory:
 
     def __init__(self) -> None:
@@ -9,11 +12,11 @@ class ViewerSimpleFactory:
 
     def createViewer(self, type):
         if type == "word":
-            print("Create viewer: word viewer!")
+            log.info("Create viewer: word viewer!")
             return WordViewer()
         elif type == "graph":
-            print("Create viewer: graph viewer!")
+            log.info("Create viewer: graph viewer!")
             return GraphViewer()
         else:
-            print("Create viewer: illegal type!")
+            log.info("Create viewer: illegal type!")
             return WordViewer()

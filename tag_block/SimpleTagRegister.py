@@ -5,7 +5,7 @@ from sys import implementation
 from tag_block.TagSubjectInterface import TagSubjectInterface
 from tag_block.TagObserverInterface import TagObserverInterface
 from helpers.helpers import extractTagFromString
-from tag_block.uiTag import TagStatus
+from tag_block.UiTag import TagStatus
 class SimpleTagRegister(TagSubjectInterface):
     tags = {}
     subscribers = []

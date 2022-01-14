@@ -15,14 +15,22 @@ class ViewerRegister(LevelObserverInterface,TagObserverInterface):
     def levelUpdate(self, levels):
         #TODO:
         self.level = copy.deepcopy(levels)
+        self.notifyViewers()
         pass
 
     def tagUpdate(self, tags: dict):
         #TODO:
         self.tags = copy.deepcopy(tags)
+        self.notifyViewers()
         pass
+
+    def notifyViewers(self):
+        for viewer in self.viewers:
+            viewer.update(self.tags, self.levels)
+            pass
 
     def createViewer(self,type):
         viewer = self.viewer_simple_factory.createViewer(type)
+        self.viewers.append(viewer)
         return viewer
         

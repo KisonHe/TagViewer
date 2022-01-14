@@ -5,7 +5,7 @@ from PyQt5 import QtWidgets, uic, QtCore
 from Ui_MainWindow import Ui_MainWindow
 from PyQt5.QtCore import Qt
 import pandas
-from tag_block.uiTag import uiTag
+from tag_block.UiTag import UiTag
 import xlrd
 from tag_block.TagRegister import TagRegister
 from tag_block.SimpleTagRegister import SimpleTagRegister
@@ -25,7 +25,7 @@ def extractTagFromString(string: str, ifIgnoreExclamationMark: bool) -> list:
         # 处理!开头的Tag
         for index in range(len(ret)):
             if (ret[index].startswith("!")):
-                if (ignoreExclamationMark):
+                if (ifIgnoreExclamationMark):
                     # 忽略!，把整个string变成"",在下面删掉
                     ret[index] = ""
                 else:
@@ -41,7 +41,6 @@ def readExcelData():
     GlobalValue.setExcelData(pandas.read_excel('./data.xls', engine='xlrd'))
     excel_data = GlobalValue.getExcelData()
 
-    #print(excel_data.iloc[1, 4])
     # 提取Tags
     Tags = {}
     # TODO:这里词典的排序，是考虑ExtraTag,还是不考虑，还是都留着？以{"TAG":[tagNum,extraTagNum]}的方式存着？
@@ -84,13 +83,17 @@ if (__name__ == "__main__"):
 
     main_tag_register = SimpleTagRegister()
     main_tag_register.registerTagObserver(level_register)
-    viewer_register = ViewerRegister()
-    wordviewer = viewer_register.createViewer("word")
     
 
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
     window.show()
+
+    viewer_register = ViewerRegister()
+    word_viewer = viewer_register.createViewer("word")
+    word_viewer.setUiInstance(window.textBrowser)
+    main_tag_register.registerTagObserver(viewer_register)
+
     main_tag_register.setUiInstance(window.tagLineEdit)
     window.tagLineEdit.textChanged.connect(main_tag_register.onTagChange)
 

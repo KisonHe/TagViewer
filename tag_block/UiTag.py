@@ -22,7 +22,7 @@ class TagStatus(Enum):
         return ["Tag未生效", "只算Main", "只算Extra", "两个都算"][self.value]
 
 
-class uiTag(TagAbstract):
+class UiTag(TagAbstract):
     status = TagStatus.NONE
 
     def updateUi(self):
