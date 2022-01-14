@@ -75,10 +75,10 @@ if (__name__ == "__main__"):
     window = MainWindow()
     window.show()
     tag_list = []
-    # for i in range(50):
-    #     mainTag = tag("Tag",None)
-    #     mainTag.setupUi(window.horizontalLayout)
-    #     tag_list.append(mainTag)
-    #     pass
-    # window.resize(800,600)
+    for i in range(4):
+        mainTag = tag("Tag",None)
+        mainTag.setupUi(window.horizontalLayout)
+        tag_list.append(mainTag)
+        pass
+    window.resize(800,600)
     app.exec()

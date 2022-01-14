@@ -1,0 +1,15 @@
+/* How to make qss has this? */
+/* :root {
+  --color-0: #ffffff;
+  --color-1: #1c1c1e;
+  --color-2: #b9b8b8;
+  --color-3: #d0d0d3;
+  --color-link:#7B90D2;
+} */
+QPushButton {
+   background-color: #8b0000;
+   color: #ffffff;
+   border-radius: 5px;
+   border-style: none;
+   height: 25px;
+}
