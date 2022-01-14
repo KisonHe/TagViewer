@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from TagObserverInterface import TagObserverInterface
+from tag_block.TagObserverInterface import TagObserverInterface
 
 
 class TagSubjectInterface:

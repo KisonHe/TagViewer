@@ -1,7 +1,8 @@
 # -*- coding: UTF-8 -*-
-from Tag import Status
-from TagSubjectInterface import TagSubjectInterface
-from TagObserverInterface import TagObserverInterface
+from tag_block.Tag import Status
+from tag_block.TagSubjectInterface import TagSubjectInterface
+from tag_block.TagObserverInterface import TagObserverInterface
+
 
 class TagRegister(TagSubjectInterface):
     tags = {}

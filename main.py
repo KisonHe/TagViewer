@@ -6,10 +6,9 @@ from PyQt5 import QtWidgets, uic
 from Ui_MainWindow import Ui_MainWindow
 from PyQt5.QtCore import Qt
 import pandas
-from Tag import Tag
+from tag_block.Tag import Tag
 import xlrd
-from TagRegister import TagRegister
-
+from tag_block.TagRegister import TagRegister
 # Set True to ignore ! starting Tags
 ignoreExclamationMark = True
 
@@ -82,6 +81,7 @@ if (__name__ == "__main__"):
     #     mainTag.setupUi(window.horizontalLayout)
     #     tag_list.append(mainTag)
     #     pass
+
     mainTag = Tag("Tag",main_tag_register)
     mainTag.setupUi(window.horizontalLayout)
 
@@ -90,6 +90,10 @@ if (__name__ == "__main__"):
 
     thirdTag = Tag("thirdTag",main_tag_register)
     thirdTag.setupUi(window.horizontalLayout)
+    # output = QtWidgets.QTextBrowser()
+
+    # output.show()
+    # output.setText("we are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \n")
 
     window.resize(800,600)
     app.exec()
