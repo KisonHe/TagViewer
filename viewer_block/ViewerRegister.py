@@ -5,7 +5,7 @@ from tag_block.TagObserverInterface import TagObserverInterface
 import copy
 class ViewerRegister(LevelObserverInterface,TagObserverInterface):
     viewers = []
-    level = {}
+    levels = {}
     tags = {}
     viewer_simple_factory = None
 
@@ -17,9 +17,9 @@ class ViewerRegister(LevelObserverInterface,TagObserverInterface):
         self.level = copy.deepcopy(levels)
         pass
 
-    def tagUpdate(self, data: dict):
+    def tagUpdate(self, tags: dict):
         #TODO:
-        self.tags = copy.deepcopy(data)
+        self.tags = copy.deepcopy(tags)
         pass
 
     def createViewer(self,type):

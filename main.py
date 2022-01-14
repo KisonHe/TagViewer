@@ -13,7 +13,7 @@ from level_block.LevelRegister import LevelRegister
 from viewer_block.ViewerRegister import ViewerRegister
 # Set True to ignore ! starting Tags
 ignoreExclamationMark = True
-
+excelData = None
 
 def extractTagFromString(string: str, ifIgnoreExclamationMark: bool) -> list:
     ret = []
@@ -37,7 +37,10 @@ def extractTagFromString(string: str, ifIgnoreExclamationMark: bool) -> list:
 
 
 def readExcelData():
+    global excelData
     excelData = pandas.read_excel('./data.xls', engine='xlrd')
+
+    print(excelData.iloc[1,4])
     # 提取Tags
     Tags = {}
     # TODO:这里词典的排序，是考虑ExtraTag,还是不考虑，还是都留着？以{"TAG":[tagNum,extraTagNum]}的方式存着？

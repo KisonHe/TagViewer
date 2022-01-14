@@ -5,7 +5,7 @@ from level_block.LevelSubjectInterface import LevelSubjectInterface
 from tag_block.TagObserverInterface import TagObserverInterface
 
 class LevelRegister(LevelSubjectInterface,TagObserverInterface):
-    tagData = {}
+    tags = {}
     subscribers = []
 
     def __init__(self):
@@ -17,10 +17,11 @@ class LevelRegister(LevelSubjectInterface,TagObserverInterface):
         self.notifyLevelObserver()
         pass
 
-    def tagUpdate(self, data:dict):
-        self.tagData = copy.deepcopy(data)
+    def tagUpdate(self, tags:dict):
+        self.tags = copy.deepcopy(tags)
         # TODO:Replace to real Update
-        print("Got info of" + str(data))
+        print("Got info of" + str(tags))
+        print("excelData")
 
     def notifyLevelObserver(self):
         for o in self.subscribers:
