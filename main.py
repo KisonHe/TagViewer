@@ -77,10 +77,19 @@ if (__name__ == "__main__"):
     window = MainWindow()
     window.show()
     tag_list = []
-    for i in range(4):
-        mainTag = Tag("Tag",main_tag_register)
-        mainTag.setupUi(window.horizontalLayout)
-        tag_list.append(mainTag)
-        pass
+    # for i in range(4):
+    #     mainTag = Tag("Tag",main_tag_register)
+    #     mainTag.setupUi(window.horizontalLayout)
+    #     tag_list.append(mainTag)
+    #     pass
+    mainTag = Tag("Tag",main_tag_register)
+    mainTag.setupUi(window.horizontalLayout)
+
+    secondTag = Tag("secondTag",main_tag_register)
+    secondTag.setupUi(window.horizontalLayout)
+
+    thirdTag = Tag("thirdTag",main_tag_register)
+    thirdTag.setupUi(window.horizontalLayout)
+
     window.resize(800,600)
     app.exec()
