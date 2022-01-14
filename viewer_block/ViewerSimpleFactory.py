@@ -8,8 +8,11 @@ class ViewerSimpleFactory:
 
     def createViewer(self, type):
         if type == "word":
+            print("Create viewer: word viewer!")
             return WordViewer()
         elif typr == "graph":
+            print("Create viewer: graph viewer!")
             return GraphViewer()
         else:
+            print("Create viewer: illegal type!")
             return WordViewer()
