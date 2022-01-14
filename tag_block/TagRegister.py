@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from tag_block.Tag import TagStatus
+from tag_block.uiTag import TagStatus
 from tag_block.TagSubjectInterface import TagSubjectInterface
 from tag_block.TagObserverInterface import TagObserverInterface
 

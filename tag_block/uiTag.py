@@ -3,7 +3,7 @@ from enum import Enum
 from PyQt5 import QtWidgets
 from design.UiInstance import PyqtUiInstance
 from design.colorDesign import tag_colors
-
+from tag_block.TagAbstract import TagAbstract
 
 # tag的可能的status
 class TagStatus(Enum):
@@ -22,12 +22,9 @@ class TagStatus(Enum):
         return ["Tag未生效", "只算Main", "只算Extra", "两个都算"][self.value]
 
 
-class Tag:
-    register = None
-    ui_instance = None
+class uiTag(TagAbstract):
     status = TagStatus.NONE
 
-    # colors = ["#9D849A","#A9B0BC","#90A3B9","#637081"]
     def updateUi(self):
         tmp = "border-radius: 3px;" + "background-color : " + tag_colors[self.status.value]
         self.ui_instance.setStyleSheet(tmp)
@@ -40,16 +37,17 @@ class Tag:
         pass
 
     def __init__(self, name, register) -> None:
+        super().__init__()
         # We want to have many choices, here should we use factory?
         # answer by jack: I think no
         self.name = name
         self.ui_instance = QtWidgets.QPushButton(name)
-        self.ui_instance.clicked.connect(self.onTagCliecked)
+        self.ui_instance.clicked.connect(self.onTagChanged)
         self.register = register
         self.register.tagChange(self.name, self.status)
         pass
 
-    def onTagCliecked(self):
+    def onTagChanged(self):
         self.status = self.status.getNext()
         self.updateUi()
         self.register.tagChange(self.name, self.status)

@@ -5,10 +5,12 @@ from PyQt5 import QtWidgets, uic, QtCore
 from Ui_MainWindow import Ui_MainWindow
 from PyQt5.QtCore import Qt
 import pandas
-from tag_block.Tag import Tag
+from tag_block.uiTag import uiTag
 import xlrd
 from tag_block.TagRegister import TagRegister
+from tag_block.SimpleTagRegister import SimpleTagRegister
 from level_block.LevelRegister import LevelRegister
+from viewer_block.ViewerRegister import ViewerRegister
 # Set True to ignore ! starting Tags
 ignoreExclamationMark = True
 
@@ -49,37 +51,45 @@ def readExcelData():
                     Tags[str(item)] = 1
     pass
 
+# class MainWindow(QtWidgets.QMainWindow):
 
-class MainWindow(QtWidgets.QMainWindow):
-
-    def __init__(self):
-        super(MainWindow, self).__init__()
-        self.setObjectName("MainWindow")
-        self.resize(800, 600)
-        self.setWindowTitle("My Awesome App")
-        self.centralwidget = QtWidgets.QWidget(self)
-        self.centralwidget.setObjectName("centralwidget")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.setCentralWidget(self.centralwidget)
+#     def __init__(self):
+#         super(MainWindow, self).__init__()
+#         self.setObjectName("MainWindow")
+#         self.resize(800, 600)
+#         self.setWindowTitle("My Awesome App")
+#         self.centralwidget = QtWidgets.QWidget(self)
+#         self.centralwidget.setObjectName("centralwidget")
+#         self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
+#         self.horizontalLayout.setObjectName("horizontalLayout")
+#         self.setCentralWidget(self.centralwidget)
 
 
-# class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
-#     def __init__(self, *args, obj=None, **kwargs):
-#         super(MainWindow, self).__init__(*args, **kwargs)
-#         self.setupUi(self)
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self, *args, obj=None, **kwargs):
+        super(MainWindow, self).__init__(*args, **kwargs)
+        self.setupUi(self)
 
 
 if (__name__ == "__main__"):
     readExcelData()
     level_register = LevelRegister()
 
-    main_tag_register = TagRegister()
+    # main_tag_register = TagRegister()
+    # main_tag_register.registerTagObserver(level_register)
+
+    main_tag_register = SimpleTagRegister()
     main_tag_register.registerTagObserver(level_register)
+    viewer_register = ViewerRegister()
+    wordviewer = viewer_register.createViewer("word")
+    
 
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
     window.show()
+    main_tag_register.setUiInstance(window.tagLineEdit)
+    window.tagLineEdit.textChanged.connect(main_tag_register.onTagChange)
+
     tag_list = []
     # for i in range(4):
     #     mainTag = Tag("Tag",main_tag_register)
@@ -87,39 +97,39 @@ if (__name__ == "__main__"):
     #     tag_list.append(mainTag)
     #     pass
 
-    mainTag = Tag("Tag", main_tag_register)
-    mainTag.setupUi(window.horizontalLayout)
+    # mainTag = uiTag("Tag", main_tag_register)
+    # mainTag.setupUi(window.horizontalLayout)
 
-    secondTag = Tag("secondTag", main_tag_register)
-    secondTag.setupUi(window.horizontalLayout)
+    # secondTag = uiTag("secondTag", main_tag_register)
+    # secondTag.setupUi(window.horizontalLayout)
 
-    thirdTag = Tag("thirdTag", main_tag_register)
-    thirdTag.setupUi(window.horizontalLayout)
+    # thirdTag = uiTag("thirdTag", main_tag_register)
+    # thirdTag.setupUi(window.horizontalLayout)
 
-    output = QtWidgets.QTextBrowser()
-    window.horizontalLayout.addWidget(output)
+    # output = QtWidgets.QTextBrowser()
+    # window.horizontalLayout.addWidget(output)
 
-    output.setText("we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n"
-                   "we are world \n")
+    # output.setText("we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n"
+    #                "we are world \n")
 
     window.resize(800, 600)
     app.exec()
