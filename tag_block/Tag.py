@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 from enum import Enum
 from PyQt5 import QtWidgets
-from UiInstance import PyqtUiInstance
-from colorDesign import tag_colors
+from design.UiInstance import PyqtUiInstance
+from design.colorDesign import tag_colors
 
 
 # tag的可能的status

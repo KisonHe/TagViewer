@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+
 class UiInstanceAbstract:
     def setupUi(self):
         pass

@@ -9,37 +9,40 @@ import pandas
 from tag_block.Tag import Tag
 import xlrd
 from tag_block.TagRegister import TagRegister
+from level_block.LevelRegister import LevelRegister
 # Set True to ignore ! starting Tags
 ignoreExclamationMark = True
 
-def extractTagFromString(string:str,ifIgnoreExclamationMark:bool)->list:
+
+def extractTagFromString(string: str, ifIgnoreExclamationMark: bool) -> list:
     ret = []
     if isinstance(string, str):
         # 去掉空格
-        string = string.replace(" ","")
+        string = string.replace(" ", "")
         ret = string.split("#")
         # 处理!开头的Tag
-        for index in range(len(ret)): 
+        for index in range(len(ret)):
             if (ret[index].startswith("!")):
                 if (ignoreExclamationMark):
                     # 忽略!，把整个string变成"",在下面删掉
                     ret[index] = ""
                 else:
-                    ret[index] = ret[index].replace("!","")
+                    ret[index] = ret[index].replace("!", "")
         # 去掉 ''
         ret = list(filter(None, ret))
-    else: 
+    else:
         raise ValueError
     return ret
 
+
 def readExcelData():
-    excelData = pandas.read_excel('./data.xls',engine='xlrd')
+    excelData = pandas.read_excel('./data.xls', engine='xlrd')
     # 提取Tags
     Tags = {}
     # TODO:这里词典的排序，是考虑ExtraTag,还是不考虑，还是都留着？以{"TAG":[tagNum,extraTagNum]}的方式存着？
     for string in list(excelData["TAG"]) + list(excelData["ExtraTag"]):
         if isinstance(string, str):
-            tmp_list = extractTagFromString(string,ignoreExclamationMark)
+            tmp_list = extractTagFromString(string, ignoreExclamationMark)
             for item in tmp_list:
                 if (item in Tags.keys()):
                     Tags[str(item)] = Tags[str(item)] + 1
@@ -70,7 +73,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
 if (__name__ == "__main__"):
     readExcelData()
+    level_register = LevelRegister()
+
     main_tag_register = TagRegister()
+    main_tag_register.registerTagObserver(level_register)
 
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
@@ -82,18 +88,39 @@ if (__name__ == "__main__"):
     #     tag_list.append(mainTag)
     #     pass
 
-    mainTag = Tag("Tag",main_tag_register)
+    mainTag = Tag("Tag", main_tag_register)
     mainTag.setupUi(window.horizontalLayout)
 
-    secondTag = Tag("secondTag",main_tag_register)
+    secondTag = Tag("secondTag", main_tag_register)
     secondTag.setupUi(window.horizontalLayout)
 
-    thirdTag = Tag("thirdTag",main_tag_register)
+    thirdTag = Tag("thirdTag", main_tag_register)
     thirdTag.setupUi(window.horizontalLayout)
-    # output = QtWidgets.QTextBrowser()
 
-    # output.show()
-    # output.setText("we are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \nwe are world \n")
+    output = QtWidgets.QTextBrowser()
+    window.horizontalLayout.addWidget(output)
 
-    window.resize(800,600)
+    output.setText("we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n"
+                   "we are world \n")
+
+    window.resize(800, 600)
     app.exec()
