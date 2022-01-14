@@ -1,8 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 import sys
-from types import prepare_class
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, uic, QtCore
 from Ui_MainWindow import Ui_MainWindow
 from PyQt5.QtCore import Qt
 import pandas
