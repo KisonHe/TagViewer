@@ -3,12 +3,15 @@ import copy
 from level_block.LevelObserverInterface import LevelObserverInterface
 from level_block.LevelSubjectInterface import LevelSubjectInterface
 from tag_block.TagObserverInterface import TagObserverInterface
+from helpers.GlobalValue import GlobalValue
 
 class LevelRegister(LevelSubjectInterface,TagObserverInterface):
     tags = {}
     subscribers = []
 
     def __init__(self):
+        excel_data = GlobalValue.getExcelData()
+        print(excel_data.iloc[1, 4])
         super().__init__()
 
     # Called by level button's click callback, to update info in the register

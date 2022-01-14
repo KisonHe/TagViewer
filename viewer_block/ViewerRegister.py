@@ -23,6 +23,6 @@ class ViewerRegister(LevelObserverInterface,TagObserverInterface):
         pass
 
     def createViewer(self,type):
-        viewer = self.viewer_simple_factory(type)
+        viewer = self.viewer_simple_factory.createViewer(type)
         return viewer
         
