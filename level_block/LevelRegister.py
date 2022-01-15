@@ -15,8 +15,6 @@ class LevelRegister(LevelSubjectInterface,TagObserverInterface):
     subscribers = []
 
     def __init__(self):
-        excel_data = GlobalValue.getExcelData()
-        print(excel_data.iloc[1, 4])
         super().__init__()
 
     # Called by level button's click callback, to update info in the register
