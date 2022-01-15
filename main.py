@@ -10,6 +10,7 @@ import xlrd
 from tag_block.TagRegister import TagRegister
 from tag_block.SimpleTagRegister import SimpleTagRegister
 from level_block.LevelRegister import LevelRegister
+from level_block.SimpleLevelRegister import SimpleLevelRegister
 from viewer_block.ViewerRegister import ViewerRegister
 from helpers.GlobalValue import GlobalValue
 # Set True to ignore ! starting Tags
@@ -81,7 +82,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 if (__name__ == "__main__"):
     readExcelData()
-    level_register = LevelRegister()
+    level_register = SimpleLevelRegister()
 
     # main_tag_register = TagRegister()
     # main_tag_register.registerTagObserver(level_register)
@@ -97,10 +98,14 @@ if (__name__ == "__main__"):
     viewer_register = ViewerRegister()
     word_viewer = viewer_register.createViewer("word")
     word_viewer.setUiInstance(window.textBrowser)
+
+    level_register.setUiInstance(window.levelLineEdit)
+    level_register.registerLevelObserver(viewer_register)
     main_tag_register.registerTagObserver(viewer_register)
 
     main_tag_register.setUiInstance(window.tagLineEdit)
     window.tagLineEdit.textChanged.connect(main_tag_register.onTagChange)
+    window.levelLineEdit.textChanged.connect(level_register.onLevelTextChange)
 
     tag_list = []
     # for i in range(4):
