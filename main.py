@@ -38,8 +38,13 @@ def extractTagFromString(string: str, ifIgnoreExclamationMark: bool) -> list:
 
 
 def readExcelData():
-    GlobalValue.setExcelData(pandas.read_excel('./data.xls', engine='xlrd'))
-    excel_data = GlobalValue.getExcelData()
+    ## This works
+    # GlobalValue.setExcelData(pandas.read_excel('./data.xls', engine='xlrd'))
+    # excel_data = GlobalValue.getExcelData()
+
+    # This too
+    GlobalValue.g_excel_data = pandas.read_excel('./data.xls', engine='xlrd')
+    excel_data = GlobalValue.g_excel_data
 
     # 提取Tags
     Tags = {}
