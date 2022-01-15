@@ -15,6 +15,7 @@ class ViewerRegister(LevelObserverInterface,TagObserverInterface):
     def levelUpdate(self, levels):
         #TODO:
         self.level = copy.deepcopy(levels)
+        print(levels)
         self.notifyViewers()
         pass
 
