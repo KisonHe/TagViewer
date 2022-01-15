@@ -5,18 +5,16 @@ from level_block.Level import LevelStatus
 
 
 class FreeDictKey:
-    key = []
 
     def __init__(self):
         self.key = []
 
-    def addElement(self,element: String):
-        self.key.appened(element)
+    def addElement(self,element: str):
+        self.key.append(element)
 
 
 
 class FreeDictValue:
-    value = []
 
     def __init__(self):
         self.value = []
@@ -25,8 +23,6 @@ class FreeDictValue:
         self.value.append(element)
 
 class FreeDict:
-    keys = []
-    values = []
 
     def __init__(self):
         self.keys = []
@@ -44,9 +40,9 @@ class FreeDict:
 
 
 class DataAnalyzer:
-    viewer_data = {}
-
+    
     def __init__(self):
+        self.viewer_data = {}
         pass
 
     def setViewerData(self, tags, levels):

@@ -36,6 +36,7 @@ class SimpleLevelRegister(LevelSubjectInterface,TagObserverInterface):
 
     def onLevelTextChange(self,text:str):
         on_level_map = []
+        levels = {}
         hasError = False
         if not (len(text) > 0):
             # avoid crash when user delete all chars
@@ -49,8 +50,9 @@ class SimpleLevelRegister(LevelSubjectInterface,TagObserverInterface):
                 if (level > self.c_config["max_level"]) or (level < self.c_config["min_level"]):
                     hasError = True
                     continue
-                self.levelChange(str(level),LevelStatus.ON)
+                # self.levelChange(str(level),LevelStatus.ON)
                 on_level_map.append(level)
+                levels[strlevel] = LevelStatus.ON
             except:
                 hasError = True
                 continue
@@ -60,7 +62,10 @@ class SimpleLevelRegister(LevelSubjectInterface,TagObserverInterface):
             self.ui_instance.setStyleSheet("background-color : white")
         for i in range(self.c_config["min_level"], self.c_config["max_level"] + 1):
             if not i in on_level_map:
-                self.levelChange(str(i),LevelStatus.OFF)
+                # self.levelChange(str(i),LevelStatus.OFF)
+                levels[str(i)] = LevelStatus.OFF
+        self.levels = levels
+        self.notifyLevelObserver()
 
     def tagUpdate(self, tags:dict):
         #Simple tag register doesn't care about tag change
