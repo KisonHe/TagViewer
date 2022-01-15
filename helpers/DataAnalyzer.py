@@ -84,7 +84,7 @@ class DataAnalyzer:
             if levels[key] == LevelStatus.ON:
                 self.viewer_data[key] = FreeDict()
 
-        for key, value in self.viewer_data:
+        for key, value in self.viewer_data.items():
             value.addKey(tags,self.writeViewerData(tags, int(key)))
             #value.setValue()
 
@@ -105,12 +105,15 @@ class DataAnalyzer:
         if len(tags) < level:
             return result
 
-        for i in range(0,len(tags)-level):
+        for i in range(0,len(tags)-level+1):
             a = [tags[i]]
             returns = self.getTagSubset(tags[i+1:] ,level-1)
-            for array in returns:
-                a = a + array
-            result.append(a)
+            if len(returns) == 0:
+                result.append(a)
+            else:
+                for array in returns:
+                    b = a + array
+                    result.append(b)
         return result
 
 
