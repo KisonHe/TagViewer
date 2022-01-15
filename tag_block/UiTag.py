@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 from enum import Enum
 from PyQt5 import QtWidgets
-from design.UiInstance import PyqtUiInstance
 from design.colorDesign import tag_colors
 from tag_block.TagAbstract import TagAbstract
 

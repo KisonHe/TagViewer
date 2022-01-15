@@ -1,21 +1,16 @@
 # -*- coding: UTF-8 -*-
-import imp
-from posixpath import split
-from sys import implementation
 from tag_block.TagSubjectInterface import TagSubjectInterface
 from tag_block.TagObserverInterface import TagObserverInterface
-from helpers.helpers import extractTagFromString
 from tag_block.UiTag import TagStatus
 class SimpleTagRegister(TagSubjectInterface):
-    tags = {}
-    subscribers = []
-    ui_instance = None
+    def __init__(self) -> None:
+        self.tags = {}
+        self.subscribers = []
+        self.ui_instance = None
+        pass
 
     def setupUi(self, parent):
         # TODO
-        pass
-
-    def __init__(self) -> None:
         pass
     def setUiInstance(self,ui):
         self.ui_instance = ui
@@ -24,6 +19,7 @@ class SimpleTagRegister(TagSubjectInterface):
     # Works like this: "线上:main 刺激：both 释放情绪：extra"
     def onTagChange(self, text:str):
         if not (len(text) > 0):
+            # avoid crash when user delete all chars
             return
         if self.ui_instance == None:
             raise "Need to call setUiInstance first"

@@ -1,8 +1,6 @@
 # -*- coding: UTF-8 -*-
 from enum import Enum
 from PyQt5 import QtWidgets
-from design.UiInstance import PyqtUiInstance
-from design.colorDesign import tag_colors
 
 class LevelStatus(Enum):
     # Must Start from 0 and add one by one
@@ -11,8 +9,8 @@ class LevelStatus(Enum):
     ON = 1
 
     def getNext(self):
-        tmp = (self.value + 1) % len(TagStatus)
-        return TagStatus(tmp)
+        tmp = (self.value + 1) % len(LevelStatus)
+        return LevelStatus(tmp)
 
     def getHintString(self):
         return ["不显示", "显示"][self.value]
