@@ -21,8 +21,8 @@ class FreeDictValue:
     def __init__(self):
         self.value = []
 
-    def addElement(self,element: String):
-        self.value.appened(element)
+    def addElement(self,element: str):
+        self.value.append(element)
 
 class FreeDict:
     keys = []
@@ -33,11 +33,11 @@ class FreeDict:
         self.values = []
 
     def addKey(self, key :FreeDictKey):
-        self.keys.appened(key)
+        self.keys.append(key)
         pass
 
     def addValue(self, value :FreeDictValue):
-        self.values.appened(value)
+        self.values.append(value)
         pass
 
 
@@ -67,11 +67,11 @@ class DataAnalyzer:
         if level <= 0:
             return None
 
-        if len(tasg.keys()) < level:
+        if len(tags.keys()) < level:
             return None
 
         for tag in tags.keys():
-            array.appened(tag)
+            array.append(tag)
 
 
 
