@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 from viewer_block.ViewerInterface import ViewerInterface
+from helpers.DataAnalyzer import *
 import copy
 class WordViewer(ViewerInterface):
     ui_instance = None
@@ -11,7 +12,9 @@ class WordViewer(ViewerInterface):
     def update(self,tags,levels):
         self.tags = copy.deepcopy(tags)
         self.levels = copy.deepcopy(levels)
-        
+        # test data struct
+        analyzer = DataAnalyzer()
+        analyzer.setViewerData(tags,levels)
         self.display({"1":[[["线下"],["过山车","飙车","线下的其他projects"]],[["搞笑"],["摩托车","飙车","搞笑的其他projects"]]],"2":[[["线下","刺激"],["过山车","飙车"]],[["线下","搞笑"],["摩托车","飙车"]]]})
 
     def display(self, data:dict):
