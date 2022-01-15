@@ -11,8 +11,8 @@ class LevelStatus(Enum):
     ON = 1
 
     def getNext(self):
-        tmp = (self.value + 1) % len(TagStatus)
-        return TagStatus(tmp)
+        tmp = (self.value + 1) % len(LevelStatus)
+        return LevelStatus(tmp)
 
     def getHintString(self):
         return ["不显示", "显示"][self.value]
