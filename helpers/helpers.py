@@ -16,5 +16,5 @@ def extractTagFromString(string: str, ifIgnoreExclamationMark: bool) -> list:
         # 去掉 ''
         ret = list(filter(None, ret))
     else:
-        raise ValueError
+        return []
     return ret

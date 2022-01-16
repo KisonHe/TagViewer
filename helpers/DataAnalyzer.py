@@ -36,6 +36,20 @@ class FreeDict:
     def __init__(self):
         self.keys = []
         self.values = []
+        self.key_value = []
+
+    def getKeyValue(self):
+        for i in range(0,len(self.keys)):
+            key = self.keys[i]
+            projects = self.values[i]
+            tags = []
+            for tag in key.keys():
+                tags.append(tag)
+            element = []
+            element.append(tags)
+            element.append(projects)
+            self.key_value.append(element)
+        return self.key_value
 
     def addKey(self, tags, subset):
         for set in subset:
@@ -47,29 +61,32 @@ class FreeDict:
 
     def setValue(self):
         excel_data = GlobalValue.g_excel_data
-        projects = excel_data[GlobalValue.g_project_list] #"娱乐项目"
+        projects = excel_data[GlobalValue.g_project_list]
+        line = 0
         for project in projects:
             for i in range(0,len(self.keys)):
                 free_dict_key = self.keys[i]
                 condition = False
-                for key,value in free_dict_key.keys():
+                for key,value in free_dict_key.items():
                     judge_tags = []
                     if value == TagStatus.MAIN_TAG_ONLY:
-                       judge_tags = judge_tags + extractTagFromString(excel_data.loc[project,GlobalValue.g_main_tag],GlobalValue.g_ignore_exclamation_mark)
+                       judge_tags = judge_tags + extractTagFromString(excel_data.loc[line,GlobalValue.g_main_tag],GlobalValue.g_ignore_exclamation_mark)
                     if value == TagStatus.EXTRA_TAG_ONLY:
-                        judge_tags = judge_tags + extractTagFromString(excel_data.loc[project, GlobalValue.g_extra_tag],GlobalValue.g_ignore_exclamation_mark)
+                        judge_tags = judge_tags + extractTagFromString(excel_data.loc[line, GlobalValue.g_extra_tag],GlobalValue.g_ignore_exclamation_mark)
                     if value == TagStatus.BOTH_TAGS:
-                        judge_tags = judge_tags + extractTagFromString(excel_data.loc[project,[GlobalValue.g_main_tag,GlobalValue.g_extra_tag]],GlobalValue.g_ignore_exclamation_mark)
+                        judge_tags = judge_tags + extractTagFromString(excel_data.loc[line, GlobalValue.g_main_tag],
+                                                                       GlobalValue.g_ignore_exclamation_mark)
+                        judge_tags = judge_tags + extractTagFromString(excel_data.loc[line, GlobalValue.g_extra_tag],
+                                                                       GlobalValue.g_ignore_exclamation_mark)
                     for tag in judge_tags:
                         if tag == key:
                             condition = True
-                    if condition == True:
-                        condition = False
-                    else:
-                        break
-            if condition == True:
-                self.values[i].append(project)
-
+                        else:
+                            condition = False
+                if condition == True:
+                    self.values[i].append(project)
+                    condition = False
+            line += 1
 
 
 class DataAnalyzer:
@@ -86,7 +103,7 @@ class DataAnalyzer:
 
         for key, value in self.viewer_data.items():
             value.addKey(tags,self.writeViewerData(tags, int(key)))
-            #value.setValue()
+            value.setValue()
 
     def writeViewerData(self, tags, level_value):
         tag_array = []
